@@ -1,0 +1,28 @@
+#include "STD_Types.h"  // Assuming this header defines u8 as unsigned char
+#include <util/delay.h>
+#include <avr/io.h>
+
+int main(void) {
+    u8 i = 0;
+
+
+
+    while (1) {
+        for (i = 0; i <= 7; i++) {
+            // Turn on current LED (i)
+            DDRA |= (1 << i);
+            PORTA |= (1 << i);
+            _delay_ms(500);
+
+            // Turn off previous LED (i-1), if not the first LED
+            if (i > 0) {
+                DDRA |= (1 << (i - 1));
+                PORTA &= ~(1 << (i - 1));
+            }
+
+            _delay_ms(500);
+        }
+    }
+
+    return 0;
+}

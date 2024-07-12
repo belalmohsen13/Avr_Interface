@@ -1,0 +1,30 @@
+/*
+ * main.c
+ *
+ *  Created on: Jul 12, 2024
+ *      Author: user
+ */
+#include "STD_Types.h"
+#include <util/delay.h>
+#include <avr/io.h>
+
+int main(void) {
+	u8 i = 0;
+	while (1) {
+		for (i = 0; i <= 7; i++) {
+			if (i == 0) {
+				DDRA |= (1 << i);
+				PORTA |= (1 << i);
+				_delay_ms(500);
+			}continue;
+			DDRA |= (1 << i);
+			PORTA |= (1 << i);
+			DDRA |= (1 << (i - 1));
+			PORTA &= ~(1 << (i - 1));
+			_delay_ms(500);
+
+		}
+	}
+	return 0;
+}
+
