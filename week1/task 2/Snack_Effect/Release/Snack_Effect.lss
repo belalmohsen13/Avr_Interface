@@ -65,8 +65,8 @@ Disassembly of section .text:
   8e:	8b b3       	in	r24, 0x1b	; 27
   90:	28 2b       	or	r18, r24
   92:	2b bb       	out	0x1b, r18	; 27
-  94:	88 e5       	ldi	r24, 0x58	; 88
-  96:	9b e1       	ldi	r25, 0x1B	; 27
+  94:	88 eb       	ldi	r24, 0xB8	; 184
+  96:	9b e0       	ldi	r25, 0x0B	; 11
   98:	fd 01       	movw	r30, r26
   9a:	31 97       	sbiw	r30, 0x01	; 1
   9c:	f1 f7       	brne	.-4      	; 0x9a <main+0x2e>
@@ -122,8 +122,8 @@ Disassembly of section .text:
  100:	8b b3       	in	r24, 0x1b	; 27
  102:	28 2b       	or	r18, r24
  104:	2b bb       	out	0x1b, r18	; 27
- 106:	88 e5       	ldi	r24, 0x58	; 88
- 108:	9b e1       	ldi	r25, 0x1B	; 27
+ 106:	88 eb       	ldi	r24, 0xB8	; 184
+ 108:	9b e0       	ldi	r25, 0x0B	; 11
  10a:	fd 01       	movw	r30, r26
  10c:	31 97       	sbiw	r30, 0x01	; 1
  10e:	f1 f7       	brne	.-4      	; 0x10c <main+0xa0>

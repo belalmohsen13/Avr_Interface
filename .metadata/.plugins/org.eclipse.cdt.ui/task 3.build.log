@@ -1,0 +1,15 @@
+02:39:34 **** Incremental Build of configuration Release for project task 3 ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -Os -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.o" -c -o "main.o" "../main.c"
+Finished building: ../main.c
+ 
+Building target: task 3.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,task 3.map -mmcu=atmega32 -o "task 3.elf"  ./main.o   
+avr-gcc.exe: 3.map: No such file or directory
+make: *** [task 3.elf] Error 1
+
+02:39:34 Build Finished (took 361ms)
+

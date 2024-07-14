@@ -1,4 +1,4 @@
-14:16:16 **** Incremental Build of configuration Debug for project First_Led ****
+02:31:26 **** Incremental Build of configuration Debug for project First_Led ****
 make all 
 Invoking: Print Size
 avr-size --format=avr --mcu=atmega32 First_Led.elf
@@ -16,5 +16,5 @@ Data:          8 bytes (0.4% Full)
 Finished building: sizedummy
  
 
-14:16:17 Build Finished (took 164ms)
+02:31:26 Build Finished (took 163ms)
 

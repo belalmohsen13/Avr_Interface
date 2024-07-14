@@ -1,10 +1,8 @@
-14:29:39 **** Incremental Build of configuration Debug for project Snack_Effect ****
+02:48:48 **** Incremental Build of configuration Release for project Snack_Effect ****
 make all 
 Building file: ../main.c
 Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.o" -c -o "main.o" "../main.c"
-In file included from ../main.c:8:
-c:/users/user/downloads/telegram desktop/imt_sdk_win_64/imt_sdk_win_64/winavr/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+avr-gcc -Wall -Os -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.o" -c -o "main.o" "../main.c"
 Finished building: ../main.c
  
 Building target: Snack_Effect.elf
@@ -16,21 +14,29 @@ Invoking: AVR Create Extended Listing
 avr-objdump -h -S Snack_Effect.elf  >"Snack_Effect.lss"
 Finished building: Snack_Effect.lss
  
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -R .fuse -R .lock -R .signature -O ihex Snack_Effect.elf  "Snack_Effect.hex"
+Finished building: Snack_Effect.hex
+ 
+Create eeprom image (ihex format)
+avr-objcopy -j .eeprom --no-change-warnings --change-section-lma .eeprom=0 -O ihex Snack_Effect.elf  "Snack_Effect.eep"
+Finished building: Snack_Effect.eep
+ 
 Invoking: Print Size
 avr-size --format=avr --mcu=atmega32 Snack_Effect.elf
 AVR Memory Usage
 ----------------
 Device: atmega32
 
-Program:    3988 bytes (12.2% Full)
+Program:     354 bytes (1.1% Full)
 (.text + .data + .bootloader)
 
-Data:          8 bytes (0.4% Full)
+Data:          0 bytes (0.0% Full)
 (.data + .bss + .noinit)
 
 
 Finished building: sizedummy
  
 
-14:29:40 Build Finished (took 763ms)
+02:48:49 Build Finished (took 912ms)
 
