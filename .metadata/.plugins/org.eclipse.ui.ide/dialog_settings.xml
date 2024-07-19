@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+		<item value="C:\Avr_Projects\week1\task_3\Snack_Effect2"/>
 		<item value="C:\Avr_Projects\week1\task_3"/>
 		<item value="C:\Avr_Projects\week1\task 1\First_Led"/>
 		<item value="C:\Avr_Projects\week1"/>

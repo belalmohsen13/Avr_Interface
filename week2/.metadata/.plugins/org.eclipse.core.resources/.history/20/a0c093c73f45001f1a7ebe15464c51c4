@@ -1,0 +1,19 @@
+/*
+ * main.c
+ *
+ *  Created on: Jul 18, 2024
+ *      Author: user
+ */
+#include "STD_Types.h"
+#include <util/delay.h>
+#include <avr/io.h>
+
+int main(void){
+	DDRA=0;
+
+	while (1){
+
+	}
+	return 0;
+}
+

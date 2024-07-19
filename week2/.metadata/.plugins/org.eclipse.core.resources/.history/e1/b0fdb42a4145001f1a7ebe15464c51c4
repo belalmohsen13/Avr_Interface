@@ -1,0 +1,86 @@
+/*
+ * main.c
+ *
+ *  Created on: Jul 18, 2024
+ *      Author: user
+ */
+/*#include "STD_Types.h"
+#include <util/delay.h>
+#include <avr/io.h>
+
+int main(void) {
+	DDRA = 0; //sw is input in first two pins
+	PORTA |= (1 << 0); // Pull up register activate
+	PORTA |= (1 << 1); // Pull up register activate
+	DDRB = 255; //pins are output
+	PORTB = 0; //outputs are LOW;
+
+	u8 segCATHODE[] = { 0x3B, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F,
+			0x6F }, counter1=0;
+	while (1) {
+		if (((PINA) & 1) == 0) {
+			counter1++;
+			while (((PINA) & 1) == 0) { //do nothing until release
+			};
+		}
+		if (((PINA >> 1) & 1) == 0) {
+			counter1--;
+			while (((PINA >> 1) & 1) == 0) { //do nothing until release
+			};
+		}
+		PORTB = segCATHODE[counter1];
+		_delay_ms(200);
+
+		while (counter1 == segCATHODE[9]) {
+		};
+		while (counter1 == segCATHODE[0]) {
+		};
+	}
+	return 0;
+}*/
+/*
+ * main.c
+ *
+ *  Created on: Jul 18, 2024
+ *      Author: user
+ */
+#include "STD_Types.h"
+#include <util/delay.h>
+#include <avr/io.h>
+
+int main(void) {
+    DDRA = 0x00; // Switches are input on PORTA
+    PORTA |= (1 << PA0); // Activate pull-up resistor on PA0
+    PORTA |= (1 << PA1); // Activate pull-up resistor on PA1
+    DDRB = 0xFF; // All pins on PORTB are output
+    PORTB = 0x00; // Initialize PORTB to LOW
+
+    u8 segCATHODE[] = { 0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F };
+    u8 counter1 = 0;
+
+    while (1) {
+        if ((PINA & (1 << PA0)) == 0) { // Check if button on PA0 is pressed
+            counter1++;
+            if (counter1 > 9) {
+                counter1 = 0;
+            }
+            while ((PINA & (1 << PA0)) == 0); // Wait until the button is released
+        }
+
+        if ((PINA & (1 << PA1)) == 0) { // Check if button on PA1 is pressed
+            if (counter1 == 0) {
+                counter1 = 9;
+            } else {
+                counter1--;
+            }
+            while ((PINA & (1 << PA1)) == 0); // Wait until the button is released
+        }
+
+        PORTB = segCATHODE[counter1]; // Display the current counter value on the 7-segment display
+        _delay_ms(200); // Debounce delay
+    }
+
+    return 0;
+}
+
+

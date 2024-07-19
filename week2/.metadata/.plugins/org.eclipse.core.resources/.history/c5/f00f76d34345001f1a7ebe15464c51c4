@@ -1,0 +1,41 @@
+/*
+ * main.c
+ *
+ *  Created on: Jul 18, 2024
+ *      Author: user
+ */
+#include "STD_Types.h"
+#include <util/delay.h>
+#include <avr/io.h>
+
+int main(void) {
+	DDRA = 0; //sw is input in first two pins
+	PORTA |= (1 << 0); // Pull up register activate
+	PORTA |= (1 << 1); // Pull up register activate
+	DDRB = 255; //pins are output
+	PORTB = 0; //outputs are LOW;
+
+	u8 segCATHODE[] = { 0x3B, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F,
+			0x6F }, counter1 = 0;
+	while (1) {
+		if (((PINA) & 1) == 0) {
+			counter1++;
+			while (((PINA) & 1) == 0) { //do nothing until release
+			};
+		}
+		if (((PINA >> 1) & 1) == 0) {
+			counter1--;
+			while (((PINA >> 1) & 1) == 0) { //do nothing until release
+			};
+		}
+		PORTB = segCATHODE[counter1];
+		_delay_ms(200);
+
+		while (counter1 == segCATHODE[9]) {
+		};
+		while (counter1 == segCATHODE[0]) {
+		};
+	}
+	return 0;
+}
+

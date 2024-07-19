@@ -1,0 +1,20 @@
+/*
+ * main.c
+ *
+ *  Created on: Jul 17, 2024
+ *      Author: user
+ */
+
+#include "STD_Types.h"
+#include <util/delay.h>
+#include <avr/io.h>
+
+int main(void) {
+DDRA=|(1<<0);
+DDRA=|(1<<1);
+	while (1) {
+
+
+
+	}
+}
