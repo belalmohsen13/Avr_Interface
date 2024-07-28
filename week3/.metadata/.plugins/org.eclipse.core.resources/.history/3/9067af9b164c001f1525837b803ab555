@@ -1,0 +1,17 @@
+/*
+ * SW_int.h
+ *
+ *  Created on: Jul 27, 2024
+ *      Author: user
+ */
+
+#ifndef SW_INT_H_
+#define SW_INT_H_
+
+#include "STD_Types.h"
+#include "ErrorState.h"
+
+ES_T SW_enuInt();
+ES_T SW_enuGetstatus(u8 * Copy_pu8SWStatus);
+
+#endif /* SW_INT_H_ */

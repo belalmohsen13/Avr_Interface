@@ -1,0 +1,14 @@
+/*
+ * SW_config.c
+ *
+ *  Created on: Jul 27, 2024
+ *      Author: user
+ */
+#include "STD_Types.h"
+#include "SW.priv.h"
+#include "SW_config.h"
+#include "DIO_int.h"
+
+SW_t SW_AstrSwitchStates[Num_Switches]={
+{DIO_u8PORTA,DIO_u8PIN0,H}
+}

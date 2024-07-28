@@ -1,0 +1,39 @@
+/*
+ * DIO_prog.c
+ *
+ *  Created on: Jul 23, 2024
+ *      Author: user
+ */
+#include"STD_Types.h"
+#include"ErrorState.h"
+
+#include"DIO_priv.h"
+#include"DIO_config.h"
+
+ES_t DIO_enuInit(void)
+{
+	ES_t Local_enuErrorState=ES_NOK;
+
+
+
+	return Local_enuErrorState;
+
+}
+
+
+ES_t DIO_enuSetPortDirection(u8 Copy_u8PortID, u8 Copy_u8Value)
+
+ES_t DIO_enuSetPortValue(u8 Copy_u8PortID, u8 Copy_u8Value)
+
+ES_t DIO_enuTogPortValue(u8 Copy_u8ID)
+
+ES_t DIO_enuGetPinValue(u8 Copy_u8PortID, u8 *Copy_pu8Value)
+
+ES_t DIO_enuSetPinDirection(u8 Copy_u8PortID, ,u8 Copy_u8PinID, u8 Copy_u8Value)
+
+ES_t DIO_enuSetPinValue(u8 Copy_u8PortID, u8 Copy_u8PinID, u8 Copy_u8Value)
+
+ES_t DIO_enuTogPin(u8 Copy_u8PortID, u8 Copy_u8PinID)
+
+ES_t DIO_enuGetPinValue(u8 Copy_u8PortID, u8 Copy_u8PinID, u8 *Copy_pu8Value)
+

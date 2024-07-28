@@ -1,0 +1,33 @@
+/*
+ * main.c
+ *
+ *  Created on: Jul 27, 2024
+ *      Author: user
+ */
+#include "STD_Types.h"
+#include "ErrorState.h"
+
+#include "SW_config.h"
+#include "SW_config.h"
+
+#include "DIO_int.h"
+#include "SW_int.h"
+SW_t SW_AstrSwitchStates[Num_Switches];
+
+int main(void) {
+
+	u8 pinstatue;
+	DIO_enuInit();
+	SW_enuInt(SW_AstrSwitchStates);
+	while (1) {
+		SW_enuGetstatus(&pinstatue, &SW_AstrSwitchStates[2]);
+		if (pinstatue == 0) {
+			DIO_enuSetPinValue(DIO_u8PORTA, DIO_u8PIN0, DIO_u8PULLUP);
+			_delay_ms(10);
+
+		} else {
+			DIO_enuSetPinValue(DIO_u8PORTA, DIO_u8PIN0, DIO_u8FLOAT);
+		}
+	}
+	return 0;
+}
