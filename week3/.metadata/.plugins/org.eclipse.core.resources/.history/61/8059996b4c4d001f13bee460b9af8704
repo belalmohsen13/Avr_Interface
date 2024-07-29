@@ -1,0 +1,17 @@
+/*
+ * Led_int.h
+ *
+ *  Created on: Jul 29, 2024
+ *      Author: user
+ */
+
+#ifndef LED_INT_H_
+#define LED_INT_H_
+
+//#include "ErrorState.h"
+#include "STD_Types.h"
+
+ES_T Led_enuInt();
+ES_T Led_enuLedTurnOn();
+ES_T Led_enuLedTurnOff();
+#endif /* LED_INT_H_ */
