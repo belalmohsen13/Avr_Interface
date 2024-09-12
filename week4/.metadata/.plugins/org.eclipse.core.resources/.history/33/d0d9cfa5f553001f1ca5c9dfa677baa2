@@ -1,0 +1,22 @@
+/*
+ * main.c
+ *
+ *  Created on: Aug 6, 2024
+ *      Author: user
+ */
+#include "STD_Types.h"
+#include "ErrorState.h"
+#include "util/delay.h"
+
+#include "DIO_int.h"
+#include "Lcd_int.h"
+
+int main(void) {
+u8 test='a'
+	DIO_enuInit();
+	LCD_enuInit();
+	while (1) {
+		LCD_enuDisplayChar(test);
+	}
+	return 0;
+}

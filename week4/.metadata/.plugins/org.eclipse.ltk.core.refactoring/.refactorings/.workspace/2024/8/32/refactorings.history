@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Delete resource &apos;Keypad/Keypad_prof.c&apos;" deleteContents="false" description="Delete resource &apos;Keypad/Keypad_prof.c&apos;" element1="/Keypad/Keypad_prof.c" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1723035001840"/>&#x0A;<refactoring comment="Rename resource &apos;Keypad&apos; to &apos;Calculator_Project&apos;" description="Rename resource &apos;Keypad&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/Keypad" name="Calculator_Project" stamp="1723130138920" updateReferences="true"/>
+</session>

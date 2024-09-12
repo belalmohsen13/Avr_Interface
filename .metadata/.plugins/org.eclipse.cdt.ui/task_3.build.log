@@ -1,25 +1,5 @@
-02:56:26 **** Incremental Build of configuration Debug for project task_3 ****
+16:39:46 **** Incremental Build of configuration Debug for project task_3 ****
 make all 
-Building file: ../main.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.o" -c -o "main.o" "../main.c"
-In file included from ../main.c:9:
-c:/users/user/downloads/telegram desktop/imt_sdk_win_64/imt_sdk_win_64/winavr/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
-Finished building: ../main.c
- 
-Building target: task_3.elf
-Invoking: AVR C Linker
-avr-gcc -Wl,-Map,task_3.map -mmcu=atmega32 -o "task_3.elf"  ./main.o   
-Finished building target: task_3.elf
- 
-Invoking: AVR Create Extended Listing
-avr-objdump -h -S task_3.elf  >"task_3.lss"
-Finished building: task_3.lss
- 
-Create Flash image (ihex format)
-avr-objcopy -R .eeprom -R .fuse -R .lock -R .signature -O ihex task_3.elf  "task_3.hex"
-Finished building: task_3.hex
- 
 Invoking: Print Size
 avr-size --format=avr --mcu=atmega32 task_3.elf
 AVR Memory Usage
@@ -36,5 +16,5 @@ Data:          8 bytes (0.4% Full)
 Finished building: sizedummy
  
 
-02:56:27 Build Finished (took 921ms)
+16:39:46 Build Finished (took 217ms)
 

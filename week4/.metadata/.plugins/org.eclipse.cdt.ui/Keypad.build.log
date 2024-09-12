@@ -1,0 +1,34 @@
+17:12:28 **** Incremental Build of configuration Debug for project Keypad ****
+make all 
+Building file: ../Keypad_prog.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=1000000UL -MMD -MP -MF"Keypad_prog.d" -MT"Keypad_prog.o" -c -o "Keypad_prog.o" "../Keypad_prog.c"
+Finished building: ../Keypad_prog.c
+ 
+Building target: Keypad.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Keypad.map -mmcu=atmega32 -o "Keypad.elf"  ./DIO_prog.o ./Keypad_prog.o ./Lcd_prog.o ./main.o   
+Finished building target: Keypad.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Keypad.elf  >"Keypad.lss"
+Finished building: Keypad.lss
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 Keypad.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:    7950 bytes (24.3% Full)
+(.text + .data + .bootloader)
+
+Data:         32 bytes (1.6% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+17:12:28 Build Finished (took 673ms)
+

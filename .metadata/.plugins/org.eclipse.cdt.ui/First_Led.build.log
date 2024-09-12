@@ -1,5 +1,21 @@
-02:31:26 **** Incremental Build of configuration Debug for project First_Led ****
+16:42:33 **** Build of configuration Debug for project First_Led ****
 make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.o" -c -o "main.o" "../main.c"
+In file included from ../main.c:8:
+c:/users/user/downloads/telegram desktop/imt_sdk_win_64/imt_sdk_win_64/winavr/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: First_Led.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,First_Led.map -mmcu=atmega32 -o "First_Led.elf"  ./main.o   
+Finished building target: First_Led.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S First_Led.elf  >"First_Led.lss"
+Finished building: First_Led.lss
+ 
 Invoking: Print Size
 avr-size --format=avr --mcu=atmega32 First_Led.elf
 AVR Memory Usage
@@ -16,5 +32,5 @@ Data:          8 bytes (0.4% Full)
 Finished building: sizedummy
  
 
-02:31:26 Build Finished (took 163ms)
+16:42:35 Build Finished (took 1s.281ms)
 

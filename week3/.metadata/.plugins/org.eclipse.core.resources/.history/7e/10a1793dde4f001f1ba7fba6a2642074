@@ -1,0 +1,184 @@
+/*
+ * Seven_Segment_prog.c
+ *
+ *  Created on: Jul 31, 2024
+ *      Author: user
+ */
+#include "STD_Types.h"
+#include "ErrorState.h"
+
+#include "Seven_Segment_priv.h"
+#include "Seven_Segment_config.h"
+
+#include "DIO_int.h"
+extern SEG_t Seven_Segment_enuAstrSegConfig[Seg_Num];
+u8 segCATHODE[] = { 0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F,0x6F };
+
+ES_T Seven_SegmentenuInit(SEG_t * Seven_Segment_pAstr_SegConfig) {
+	ES_T Local_ErrorState = ES_NOK;
+
+	if (Seven_Segment_pAstr_SegConfig != NULL) {
+
+		u8 Local_Iteration;
+		for (Local_Iteration = 0; Local_Iteration < Seg_Num;Local_Iteration++)
+		{
+			DIO_enuSetPinDirection(Seven_Segment_pAstr_SegConfig[Local_Iteration].Seg_u8APort,Seven_Segment_pAstr_SegConfig[Local_Iteration].Seg_u8APin,DIO_u8OUTPUT);
+			DIO_enuSetPinDirection(Seven_Segment_pAstr_SegConfig[Local_Iteration].Seg_u8BPort,Seven_Segment_pAstr_SegConfig[Local_Iteration].Seg_u8BPin,DIO_u8OUTPUT);
+			DIO_enuSetPinDirection(Seven_Segment_pAstr_SegConfig[Local_Iteration].Seg_u8CPort,Seven_Segment_pAstr_SegConfig[Local_Iteration].Seg_u8CPin,DIO_u8OUTPUT);
+			DIO_enuSetPinDirection(Seven_Segment_pAstr_SegConfig[Local_Iteration].Seg_u8DPort,Seven_Segment_pAstr_SegConfig[Local_Iteration].Seg_u8DPin,DIO_u8OUTPUT);
+			DIO_enuSetPinDirection(Seven_Segment_pAstr_SegConfig[Local_Iteration].Seg_u8EPort,Seven_Segment_pAstr_SegConfig[Local_Iteration].Seg_u8EPin,DIO_u8OUTPUT);
+			DIO_enuSetPinDirection(Seven_Segment_pAstr_SegConfig[Local_Iteration].Seg_u8FPort,Seven_Segment_pAstr_SegConfig[Local_Iteration].Seg_u8FPin,DIO_u8OUTPUT);
+			DIO_enuSetPinDirection(Seven_Segment_pAstr_SegConfig[Local_Iteration].Seg_u8GPort,Seven_Segment_pAstr_SegConfig[Local_Iteration].Seg_u8GPin,DIO_u8OUTPUT);
+			if (Seven_Segment_pAstr_SegConfig[Local_Iteration].Seg_u8CMNPort!= Not_Connected   &&   Seven_Segment_pAstr_SegConfig[Local_Iteration].Seg_u8CMNPin!= Not_Connected)
+			{
+				DIO_enuSetPinDirection(Seven_Segment_pAstr_SegConfig[Local_Iteration].Seg_u8CMNPort,Seven_Segment_pAstr_SegConfig[Local_Iteration].Seg_u8CMNPin,DIO_u8OUTPUT);
+			}
+			if (Seven_Segment_pAstr_SegConfig[Local_Iteration].Seg_u8DotPort!= Not_Connected  && Seven_Segment_pAstr_SegConfig[Local_Iteration].Seg_u8DotPin!= Not_Connected)
+			{
+				DIO_enuSetPinDirection(Seven_Segment_pAstr_SegConfig[Local_Iteration].Seg_u8DotPort,Seven_Segment_pAstr_SegConfig[Local_Iteration].Seg_u8DotPin,DIO_u8OUTPUT);
+			}
+		}
+	} else {
+		Local_ErrorState = ES_NULL_POINTER;
+	}
+	return Local_ErrorState;
+}
+ES_T Seven_Segment_enuDisplayNumber(u8 Copy_u8_SegNumber, u8 Copy_u8SegID) {
+	ES_T Local_ErrorState = ES_NOK;
+
+	if (Copy_u8_SegNumber <= 9 && Copy_u8SegID <= Seg_Num) {
+	if(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8Type==Common_Cathode) {
+		DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8APort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8APin,((segCATHODE[Copy_u8_SegNumber]>>0)&1));
+		DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8BPort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8BPin,((segCATHODE[Copy_u8_SegNumber]>>1)&1));
+		DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8CPort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8CPin,((segCATHODE[Copy_u8_SegNumber]>>2)&1));
+		DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8DPort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8DPin,((segCATHODE[Copy_u8_SegNumber]>>3)&1));
+		DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8EPort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8EPin,((segCATHODE[Copy_u8_SegNumber]>>4)&1));
+		DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8FPort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8FPin,((segCATHODE[Copy_u8_SegNumber]>>5)&1));
+		DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8GPort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8GPin,((segCATHODE[Copy_u8_SegNumber]>>6)&1));
+
+	}
+	else if(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8Type==Common_anode) {
+		DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8APort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8APin,!((segCATHODE[Copy_u8_SegNumber]>>0)&1));
+		DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8BPort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8BPin,!((segCATHODE[Copy_u8_SegNumber]>>1)&1));
+		DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8CPort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8CPin,!((segCATHODE[Copy_u8_SegNumber]>>2)&1));
+		DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8DPort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8DPin,!((segCATHODE[Copy_u8_SegNumber]>>3)&1));
+		DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8EPort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8EPin,!((segCATHODE[Copy_u8_SegNumber]>>4)&1));
+		DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8FPort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8FPin,!((segCATHODE[Copy_u8_SegNumber]>>5)&1));
+		DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8GPort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8GPin,!((segCATHODE[Copy_u8_SegNumber]>>6)&1));
+	}
+
+	Local_ErrorState = ES_OK;
+}
+else {
+	Local_ErrorState=ES_OUT_OF_RANGE;
+}
+return Local_ErrorState;
+}
+ES_T Seven_Segment_enuEnableCommon(u8 Copy_u8SegID) {
+ES_T Local_ErrorState = ES_NOK;
+if ( Copy_u8SegID <= Seg_Num) {
+	if(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8CMNPort!= Not_Connected&& Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8CMNPin!= Not_Connected)
+		{
+			if(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8Type==Common_Cathode)
+			{
+				DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8CMNPort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8CMNPin,DIO_u8LOW);
+			}
+			else if(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8Type==Common_anode)
+			{
+				DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8CMNPort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8CMNPin,DIO_u8HIGH);
+			}
+		}
+}
+else
+{
+	Local_ErrorState=ES_OUT_OF_RANGE;
+}
+
+
+return Local_ErrorState;
+}
+ES_T Seven_Segment_enuDisableCommon(u8 Copy_u8SegID) {
+ES_T Local_ErrorState = ES_NOK;
+if ( Copy_u8SegID < Seg_Num) {
+	if(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8CMNPort!= Not_Connected&& Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8CMNPin!= Not_Connected){
+
+	if(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8Type==Common_Cathode) {
+		DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8CMNPort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8CMNPin,DIO_u8HIGH);
+	}
+	else if(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8Type==Common_anode) {
+		DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8CMNPort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8CMNPin,DIO_u8LOW);
+	}
+}
+}
+else{
+	Local_ErrorState=ES_OUT_OF_RANGE;
+}
+
+return Local_ErrorState;
+}
+ES_T Seven_Segment_enuEnableDot(u8 Copy_u8SegID) {
+ES_T Local_ErrorState = ES_NOK;
+if ( Copy_u8SegID < Seg_Num) {
+	if(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8DotPort!= Not_Connected&& Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8DotPin!= Not_Connected){
+	if(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8Type==Common_Cathode) {
+		DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8DotPort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8DotPin,DIO_u8HIGH);
+	}
+	else if(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8Type==Common_anode) {
+		DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8DotPort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8DotPin,DIO_u8LOW);
+	}
+}
+}
+else{
+	Local_ErrorState=ES_OUT_OF_RANGE;
+}
+return Local_ErrorState;
+}
+ES_T Seven_Segment_enuDisableDot(u8 Copy_u8SegID) {
+	ES_T Local_ErrorState = ES_NOK;
+	if ( Copy_u8SegID < Seg_Num) {
+		if(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8DotPort!= Not_Connected&& Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8DotPin!= Not_Connected){
+		if(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8Type==Common_Cathode) {
+			DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8DotPort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8DotPin,DIO_u8LOW);
+		}
+		else if(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8Type==Common_anode) {
+			DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8DotPort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8DotPin,DIO_u8HIGH);
+		}
+	}
+	}
+	else{
+		Local_ErrorState=ES_OUT_OF_RANGE;
+	}
+	return Local_ErrorState;
+	}
+ES_T Seven_Segment_enuClearoff(u8 Copy_u8SegID) {
+	ES_T Local_ErrorState = ES_NOK;
+
+if (Copy_u8SegID < Seg_Num)
+{
+	if(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8Type==Common_Cathode)
+	{
+		DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8APort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8APin,DIO_u8HIGH);
+		DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8BPort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8BPin,DIO_u8HIGH);
+		DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8CPort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8CPin,DIO_u8HIGH);
+		DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8DPort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8DPin,DIO_u8HIGH);
+		DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8EPort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8EPin,DIO_u8HIGH);
+		DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8FPort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8FPin,DIO_u8HIGH);
+		DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8GPort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8GPin,DIO_u8HIGH);
+
+	}
+	else if(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8Type==Common_anode)
+	{
+		DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8APort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8APin,DIO_u8LOW);
+		DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8BPort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8BPin,DIO_u8LOW);
+		DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8CPort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8CPin,DIO_u8LOW);
+		DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8DPort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8DPin,DIO_u8LOW);
+		DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8EPort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8EPin,DIO_u8LOW);
+		DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8FPort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8FPin,DIO_u8LOW);
+		DIO_enuSetPinValue(Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8GPort,Seven_Segment_enuAstrSegConfig[Copy_u8SegID].Seg_u8GPin,DIO_u8LOW);
+	}
+}
+else {
+	Local_ErrorState=ES_OUT_OF_RANGE;
+}
+return Local_ErrorState;
+}
